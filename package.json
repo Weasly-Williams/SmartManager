@@ -1,0 +1,20 @@
+{
+  "name": "smart-manager",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "engines": { "node": ">=24.14.0 <25" },
+  "scripts": {
+    "dev:frontend": "npm run start --workspace frontend",
+    "dev:backend": "npm run dev --workspace backend",
+    "android": "npm run android --workspace frontend",
+    "ios": "npm run ios --workspace frontend",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "npm run lint --workspace frontend",
+    "build:backend": "npm run build --workspace backend",
+    "start:backend": "npm run start --workspace backend",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f mysql"
+  }
+}
