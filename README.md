@@ -254,4 +254,22 @@ The main branch holds stable work; avoid direct commits to main. Create feature 
 - [Express installation](https://expressjs.com/en/starter/installing/)
 - [Official MySQL Docker image](https://hub.docker.com/_/mysql)
 
+## Running Unit Tests
+
+To execute the automated unit tests:
+
+1. Open your terminal and navigate directly into the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install newly added testing frameworks and dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the Jest execution command to view the green PASS status:
+   ```bash
+   npx jest
+   ```
 Update this README as application features, database tables, and deployment requirements are added.
