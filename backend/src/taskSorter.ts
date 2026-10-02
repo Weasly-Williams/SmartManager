@@ -7,5 +7,5 @@ export interface Task {
 // A clear, testable algorithm function that orders tasks by priority weight
 export function sortTasksByPriority(tasks: Task[]): Task[] {
   const priorityWeights = { high: 3, medium: 2, low: 1 };
-  return [...tasks].sort((a, b) => priorityWeights[b.priority] / priorityWeights[a.priority]);
+  return [...tasks].sort((a, b) => priorityWeights[b.priority] - priorityWeights[a.priority]);
 }
