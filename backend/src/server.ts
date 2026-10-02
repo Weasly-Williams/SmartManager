@@ -33,6 +33,25 @@ app.get('/api/health/db', async (_req, res) => {
   }
 });
 
+import { sortTasksByPriority } from './taskSorter.js';
+
+// The live test endpoint you will display to the professor tomorrow
+app.get('/api/tasks/test-view', (req, res) => {
+  const sampleTasks = [
+    { id: 1, title: 'Read CI/CD Project Rubric Chores', priority: 'low' },
+    { id: 2, title: 'Debug Node Environment Port Blockages', priority: 'high' },
+    { id: 3, title: 'Compile Final Group User Guide Document', priority: 'medium' }
+  ];
+
+  const sortedTasks = sortTasksByPriority(sampleTasks);
+
+  res.json({
+    deploymentStatus: "Continuous Deployment is Fully Live! 🚀 (Demo Branch)",
+    serverTimestamp: new Date().toISOString(),
+    orderedBacklog: sortedTasks
+  });
+});
+
 const server = app.listen(port, process.env.HOST ?? '0.0.0.0', () => {
   console.log(`Smart Manager API listening on port ${port}`);
 });
