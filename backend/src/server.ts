@@ -2,6 +2,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import mysql from 'mysql2/promise';
+import type { Task } from './taskSorter.js';
 
 const app = express();
 const port = Number(process.env.PORT ?? 3000);
@@ -37,7 +38,7 @@ import { sortTasksByPriority } from './taskSorter.js';
 
 // The live test endpoint you will display to the professor tomorrow
 app.get('/api/tasks/test-view', (req, res) => {
-  const sampleTasks = [
+  const sampleTasks: Task[] = [
     { id: 1, title: 'Read CI/CD Project Rubric Chores', priority: 'low' },
     { id: 2, title: 'Debug Node Environment Port Blockages', priority: 'high' },
     { id: 3, title: 'Compile Final Group User Guide Document', priority: 'medium' }
