@@ -46,7 +46,7 @@ app.get('/api/tasks/test-view', (req, res) => {
   const sortedTasks = sortTasksByPriority(sampleTasks);
 
   res.json({
-    deploymentStatus: "Continuous Deployment is Fully Live! 🚀 (Demo Branch)",
+    deploymentStatus: "Continuous Deployment is Fully Live! 🚀 ( Demo Branch )",
     serverTimestamp: new Date().toISOString(),
     orderedBacklog: sortedTasks
   });
