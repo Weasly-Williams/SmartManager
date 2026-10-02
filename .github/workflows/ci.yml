@@ -30,3 +30,12 @@ jobs:
       run: |
         cd backend
         npx jest
+        
+  deploy-backend:
+    needs: test-backend # Deploy ONLY if all tests pass first
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger Render Live Deployment Webhook
+      run: |
+        curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
