@@ -33,11 +33,11 @@ app.get('/api/health/db', async (_req, res) => {
   }
 });
 
-import { sortTasksByPriority } from './taskSorter.js';
+import { sortTasksByPriority, type Task } from './taskSorter.js';
 
 // The live test endpoint you will display to the professor tomorrow
 app.get('/api/tasks/test-view', (req, res) => {
-  const sampleTasks = [
+  const sampleTasks: Task[] = [
     { id: 1, title: 'Read CI/CD Project Rubric Chores', priority: 'low' },
     { id: 2, title: 'Debug Node Environment Port Blockages', priority: 'high' },
     { id: 3, title: 'Compile Final Group User Guide Document', priority: 'medium' }
@@ -46,7 +46,7 @@ app.get('/api/tasks/test-view', (req, res) => {
   const sortedTasks = sortTasksByPriority(sampleTasks);
 
   res.json({
-    deploymentStatus: "Continuous Deployment is Fully Live! 🚀 ( Demo Branch )",
+    deploymentStatus: "Continuous Deployment Example!",
     serverTimestamp: new Date().toISOString(),
     orderedBacklog: sortedTasks
   });
