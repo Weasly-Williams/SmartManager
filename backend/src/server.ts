@@ -42,7 +42,8 @@ app.get('/api/tasks/test-view', (req, res) => {
     { id: 1, title: 'Read CI/CD Project Rubric Chores', priority: 'low' },
     { id: 2, title: 'Debug Node Environment Port Blockages', priority: 'high' },
     { id: 3, title: 'Compile Final Group User Guide Document', priority: 'medium' },
-    { id: 4, title: 'Review and Approve Pull Requests', priority: 'high' }
+    { id: 4, title: 'Review and Approve Pull Requests', priority: 'high' },
+    { id: 5, title: 'Update Documentation for New Features', priority: 'medium' }
   ];
 
   const sortedTasks = sortTasksByPriority(sampleTasks);
