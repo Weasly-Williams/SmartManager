@@ -36,7 +36,6 @@ app.get('/api/health/db', async (_req, res) => {
 
 import { sortTasksByPriority } from './taskSorter.js';
 
-// The live test endpoint you will display to the professor tomorrow
 app.get('/api/tasks/test-view', (req, res) => {
   const sampleTasks: Task[] = [
     { id: 1, title: 'Read CI/CD Project Rubric Chores', priority: 'low' },
