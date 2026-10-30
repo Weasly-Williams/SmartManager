@@ -255,21 +255,28 @@ The main branch holds stable work; avoid direct commits to main. Create feature 
 - [Official MySQL Docker image](https://hub.docker.com/_/mysql)
 
 ## Running Unit Tests
+Follow these standalone steps to clone, configure, and execute our automated unit tests:
 
-To execute the automated unit tests:
+*Note: To run unit tests you do not need to install or run Docker Desktop, configure local `.env` database files, or start the frontend/backend servers to verify unit tests. They execute entirely inside an isolated terminal window.*
 
-1. Open your terminal and navigate directly into the backend directory:
-   ```bash
-   cd backend
-   ```
+### Step 1: Clone the Repository and Navigate to the Project
+Open your terminal window and download the main up-to-date repository:
+```bash
+git clone <REPOSITORY_URL>
+cd Smart_Manager
+```
 
-2. Install newly added testing frameworks and dependencies:
-   ```bash
-   npm install
-   ```
+### Step 2: Enter the Backend Folder and Install Dependencies
+Move directly inside the backend code directory to download our testing framework libraries and type definitions:
+```bash
+cd backend
+npm install
+```
 
-3. Run the Jest execution command to view the green PASS status:
-   ```bash
-   npx jest
-   ```
+### Step 3: Run the Automated Tests
+Execute Jest to automatically scan the workspace, run your equivalence tests, and output the pass/fail verification blocks:
+```bash
+npx jest src/<SPECIFIC_TEST_FILE>
+```
+*(Alternatively, you can execute `npx jest` with no file path to run all project backend tests simultaneously).*
 Update this README as application features, database tables, and deployment requirements are added.
