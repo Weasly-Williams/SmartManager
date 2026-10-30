@@ -255,28 +255,31 @@ The main branch holds stable work; avoid direct commits to main. Create feature 
 - [Official MySQL Docker image](https://hub.docker.com/_/mysql)
 
 ## Running Unit Tests
-Follow these standalone steps to clone, configure, and execute our automated unit tests:
 
-*Note: To run unit tests you do not need to install or run Docker Desktop, configure local `.env` database files, or start the frontend/backend servers to verify unit tests. They execute entirely inside an isolated terminal window.*
+Install dependencies from the repository root with `npm ci`. Tests use Jest and mocked AI/repository interfaces: no API keys, live model calls, MySQL, Docker, `.env` files, or running servers are required.
 
-### Step 1: Clone the Repository and Navigate to the Project
-Open your terminal window and download the main up-to-date repository:
-```bash
-git clone <REPOSITORY_URL>
-cd Smart_Manager
+```sh
+# All backend tests
+npm test
+# Five implemented AI assistant tests plus seven skipped TODO stubs
+npm run test:ai
+# Check backend TypeScript and compile
+npm run typecheck --workspace backend
+npm run build:backend
 ```
 
-### Step 2: Enter the Backend Folder and Install Dependencies
-Move directly inside the backend code directory to download our testing framework libraries and type definitions:
-```bash
-cd backend
-npm install
-```
+The AI assistant foundation is in `backend/src/aiAssistant.ts`; its tests are in `backend/src/aiAssistant.test.ts`. It is not connected to an Express route, a real AI provider, authentication, or MySQL yet. Future adapters must obtain user identity from authenticated server context and enforce ownership in the database update itself. Advice mode is an explicit application input, not inferred from prompt wording. Schedule timestamps are UTC epoch milliseconds; natural-language date interpretation is not implemented.
 
-### Step 3: Run the Automated Tests
-Execute Jest to automatically scan the workspace, run your equivalence tests, and output the pass/fail verification blocks:
-```bash
-npx jest src/<SPECIFIC_TEST_FILE>
-```
-*(Alternatively, you can execute `npx jest` with no file path to run all project backend tests simultaneously).*
+The five implemented test cases prioritize protecting user data and preventing unintended writes:
+
+1. User authorization: another user's tasks are withheld from the model and cannot be changed.
+2. AI response validation: malformed output, unsupported actions, and invented IDs are rejected.
+3. Advice-only requests: no changes are saved, even if the model proposes a scheduling action.
+4. Invalid changes: invalid dates, nonexistent tasks, and zero/negative durations are rejected.
+5. Valid changes: only the selected task's schedule is updated, using the authenticated user's ID.
+
+Each case uses fresh mocked dependencies and fixed dates. The seven remaining cases are named `test.skip` functions containing `// ToDo`: prompt validation, schedule generation, conflicts, priority ordering, ambiguous requests, failure handling, and time zones. Jest reports these as skipped, not passed; these behaviors are not implemented by this service yet. Existing task sorter/conflict tests are separate from these future assistant scenarios.
+
+For the code review assignment, the reviewer should check out the submitted branch/commit, run `npm ci` followed by `npm run test:ai`, and capture the command, named results, and final summary. Include the actual branch/commit repository URL in Code Review Form-2. The reviewer must separately complete the form, capture its summary, and prepare the required PDF with identifying information and the course's filename convention. Terminal test output alone does not complete the review artifact.
+
 Update this README as application features, database tables, and deployment requirements are added.

@@ -5,6 +5,8 @@
   "workspaces": ["frontend", "backend"],
   "engines": { "node": ">=24.14.0 <25" },
   "scripts": {
+    "test": "npm run test --workspace backend -- --runInBand",
+    "test:ai": "npm run test --workspace backend -- --runInBand src/aiAssistant.test.ts --verbose",
     "dev:frontend": "npm run start --workspace frontend",
     "dev:backend": "npm run dev --workspace backend",
     "android": "npm run android --workspace frontend",
